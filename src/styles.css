@@ -7,8 +7,26 @@ body {
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #2C3639
 }
 
+button {
+  all: unset;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+/* button:focus,
+button:hover {
+  stroke: white
+}
+
+button:focus:not(:focus-visible):not(:hover) {
+  stroke: lightgray
+} */
+
 p {
-  text-shadow: 1px 1px black;
+  text-shadow: 1px 1px #3F4E4F;
 }
