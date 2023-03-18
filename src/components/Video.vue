@@ -52,7 +52,13 @@
       </p>
     </div>
     <button type="button" @click="playPause">
-      <img :src="this.paused ? playSvg.default : pauseSvg.default"/>
+      <svg viewBox="0 0 24 24">
+        <use
+          :xlink:href="`${
+            this.paused ? playSvg.default : pauseSvg.default
+          }#playPause`"
+        />
+      </svg>
     </button>
   </div>
 </template>

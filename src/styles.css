@@ -18,6 +18,14 @@ button {
   align-items: center;
 }
 
+button:hover use::part(test) {
+  stroke: white !important;
+}
+
+/* button:focus {
+  outline: 2px solid lightgray;
+} */
+
 /* button:focus,
 button:hover {
   stroke: white
