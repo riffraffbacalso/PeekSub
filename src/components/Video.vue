@@ -1,6 +1,6 @@
 <script>
-  import * as pauseSvg from "../assets/pause.svg";
-  import * as playSvg from "../assets/play.svg";
+  import pauseSvg from "../assets/pause.svg?raw";
+  import playSvg from "../assets/play.svg?raw";
 
   export default {
     data() {
@@ -51,14 +51,10 @@
         It's interesting, the ghosts
       </p>
     </div>
-    <button type="button" @click="playPause">
-      <svg viewBox="0 0 24 24">
-        <use
-          :xlink:href="`${
-            this.paused ? playSvg.default : pauseSvg.default
-          }#playPause`"
-        />
-      </svg>
-    </button>
+    <button
+      type="button"
+      @click="playPause"
+      v-html="this.paused ? playSvg : pauseSvg"
+    ></button>
   </div>
 </template>

@@ -18,8 +18,12 @@ button {
   align-items: center;
 }
 
-button:hover use::part(test) {
+button:hover svg {
   stroke: white !important;
+}
+
+button:focus-visible {
+  outline: 2px solid lightgray
 }
 
 /* button:focus {
@@ -29,10 +33,6 @@ button:hover use::part(test) {
 /* button:focus,
 button:hover {
   stroke: white
-}
-
-button:focus:not(:focus-visible):not(:hover) {
-  stroke: lightgray
 } */
 
 p {
