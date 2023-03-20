@@ -1,20 +1,15 @@
 <script>
-  import pauseSvg from "../assets/pause.svg?raw";
-  import playSvg from "../assets/play.svg?raw";
+  import PlayPauseButton from "./PlayPauseButton.vue";
 
   export default {
+    components: {
+      PlayPauseButton,
+    },
     data() {
       return {
-        vid: { type: Element },
-        paused: { type: Boolean },
-        pauseSvg,
-        playSvg,
+        vid: null,
+        paused: null,
       };
-    },
-    computed: {
-      playPauseSvg() {
-        return this.paused ? playSvg : pauseSvg;
-      },
     },
     methods: {
       playPause() {
@@ -33,13 +28,7 @@
 <template>
   <div class="container-fluid w-50 h-50">
     <div class="container-fluid d-flex position-relative w-100 h-100 pb-2 px-0">
-      <video
-        ref="vid"
-        class="object-fit-md-contain w-100 h-100"
-        loop
-        muted
-        @loadeddata.once="playPause"
-      >
+      <video ref="vid" class="object-fit-md-contain w-100 h-100" loop muted>
         <source src="../assets/rocks.mp4" type="video/mp4" />
       </video>
       <p
@@ -56,6 +45,6 @@
         It's interesting, the ghosts
       </p>
     </div>
-    <button type="button" @click="playPause" v-html="playPauseSvg" />
+    <PlayPauseButton :paused="paused" :playPause="playPause" />
   </div>
 </template>
