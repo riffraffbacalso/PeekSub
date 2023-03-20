@@ -11,6 +11,11 @@
         playSvg,
       };
     },
+    computed: {
+      playPauseSvg() {
+        return this.paused ? playSvg : pauseSvg;
+      },
+    },
     methods: {
       playPause() {
         if (this.vid.paused) this.vid.play();
@@ -26,7 +31,7 @@
 </script>
 
 <template>
-  <div class="container-fluid w-75 h-75">
+  <div class="container-fluid w-50 h-50">
     <div class="container-fluid d-flex position-relative w-100 h-100 pb-2 px-0">
       <video
         ref="vid"
@@ -51,10 +56,6 @@
         It's interesting, the ghosts
       </p>
     </div>
-    <button
-      type="button"
-      @click="playPause"
-      v-html="this.paused ? playSvg : pauseSvg"
-    ></button>
+    <button type="button" @click="playPause" v-html="playPauseSvg" />
   </div>
 </template>
