@@ -1,26 +1,22 @@
 <script>
-  import pauseSvg from "../assets/pause.svg?raw";
-  import playSvg from "../assets/play.svg?raw";
+  import PauseSvg from "../assets/pause.svg?component";
+  import PlaySvg from "../assets/play.svg?component";
 
   export default {
+    components: {
+      PauseSvg,
+      PlaySvg,
+    },
     props: {
       paused: Boolean,
       playPause: Function,
-    },
-    data() {
-      return {
-        pauseSvg,
-        playSvg,
-      };
-    },
-    computed: {
-      playPauseSvg() {
-        return this.paused ? playSvg : pauseSvg;
-      },
     },
   };
 </script>
 
 <template>
-  <button type="button" @click="playPause" v-html="playPauseSvg" />
+  <button type="button" @click="playPause">
+    <PauseSvg v-show="!paused" />
+    <PlaySvg v-show="paused" />
+  </button>
 </template>

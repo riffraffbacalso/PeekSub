@@ -18,14 +18,14 @@
     methods: {
       onLoad() {
         this.duration = +this.vid.duration.toFixed(1);
+        this.currentTime = +this.vid.currentTime.toFixed(1);
       },
       onUpdate() {
-        requestAnimationFrame(
-          () => (this.currentTime = +this.vid.currentTime.toFixed(1))
-        );
+        this.currentTime = +this.vid.currentTime.toFixed(1);
       },
       onEnd() {
         this.paused = true;
+        this.currentTime = 0;
       },
       playPause() {
         if (this.vid.paused) this.vid.play();
@@ -72,7 +72,7 @@
         <PlayPauseButton :paused="paused" :playPause="playPause" />
       </div>
       <div class="col align-self-center px-0 mx-1">
-        <Progress :value="currentTime" :min="0" :max="duration" label="" />
+        <Progress :currentTime="currentTime" :min="0" :max="duration" label="" />
       </div>
     </div>
   </div>
