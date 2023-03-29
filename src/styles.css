@@ -10,8 +10,67 @@ body {
   background-color: #2c3639;
 }
 
-p {
+.app-container {
+  max-width: 50%;
+  max-height: 50%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  margin-right: auto;
+  margin-left: auto;
+
+  outline: 1px solid black;
+}
+
+.video-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding-right: 0;
+  padding-left: 0;
+
+  outline: 1px solid black;
+}
+
+.video {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.subtitles {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: calc(1.275rem + 0.3vw);
+  color: white;
   text-shadow: 1px 1px 1px black;
+}
+
+.subtitles[contenteditable]:focus {
+  outline: none;
+  background-color: rgba(80, 80, 80, 0.25);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 0.5rem;
+}
+
+.play-pause-container {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+.progress-container {
+  flex: 1 0 0;
+  align-self: center;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
 }
 
 button {
@@ -23,7 +82,7 @@ button {
 }
 
 button:hover svg {
-  stroke: white !important;
+  stroke: white;
 }
 
 button:focus-visible {

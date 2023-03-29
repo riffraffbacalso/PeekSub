@@ -8,15 +8,15 @@
       PlaySvg,
     },
     props: {
-      paused: Boolean,
-      playPause: Function,
+      isPaused: Boolean,
+      onClick: Function,
     },
   };
 </script>
 
 <template>
-  <button type="button" @click="playPause">
-    <PauseSvg v-show="!paused" />
-    <PlaySvg v-show="paused" />
+  <button type="button" @click="onClick">
+    <PauseSvg v-show="!isPaused" />
+    <PlaySvg v-show="isPaused" />
   </button>
 </template>

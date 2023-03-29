@@ -10,7 +10,7 @@
     data() {
       return {
         vid: null,
-        paused: null,
+        isPaused: null,
         currentTime: null,
         duration: null,
       };
@@ -24,55 +24,50 @@
         this.currentTime = +this.vid.currentTime.toFixed(1);
       },
       onEnd() {
-        this.paused = true;
+        this.isPaused = true;
         this.currentTime = 0;
       },
       playPause() {
         if (this.vid.paused) this.vid.play();
         else this.vid.pause();
-        this.paused = !this.paused;
+        this.isPaused = !this.isPaused;
       },
     },
     mounted() {
       this.vid = this.$refs.vid;
-      this.paused = this.vid.paused;
+      this.isPaused = this.vid.paused;
       this.currentTime = this.vid.currentTime;
     },
   };
 </script>
 
 <template>
-  <div class="container-fluid w-50 h-50">
-    <div class="container-fluid d-flex position-relative w-100 h-100 pb-2 px-0">
+  <div class="app-container">
+    <div class="video-container">
       <video
         ref="vid"
-        class="object-fit-md-contain w-100 h-100"
+        class="video"
         @loadedmetadata="onLoad"
         @timeupdate="onUpdate"
         @ended="onEnd"
       >
         <source src="../assets/rocks.mp4" type="video/mp4" />
       </video>
-      <p
-        :class="[
-          'position-absolute',
-          'bottom-0',
-          'start-50',
-          'translate-middle-x',
-          'text-center',
-          'fs-4',
-          'text-light',
-        ]"
-      >
+      <p class="subtitles" contenteditable="true">
         It's interesting, the ghosts
       </p>
     </div>
-    <div class="row mx-0">
-      <div class="col-sm-auto px-0">
-        <PlayPauseButton :paused="paused" :playPause="playPause" />
+    <div class="controls">
+      <div class="play-pause-container">
+        <PlayPauseButton :isPaused="isPaused" :onClick="playPause" />
       </div>
-      <div class="col align-self-center px-0 mx-1">
-        <Progress :currentTime="currentTime" :min="0" :max="duration" label="" />
+      <div class="progress-container">
+        <Progress
+          :currentTime="currentTime"
+          :min="0"
+          :max="duration"
+          label=""
+        />
       </div>
     </div>
   </div>

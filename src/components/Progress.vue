@@ -10,9 +10,6 @@
         return `width: ${((this.currentTime * 100) / this.max).toFixed(1)}%`;
       },
     },
-    mounted() {
-      // console.log("p", this.max);
-    },
   };
 </script>
 
