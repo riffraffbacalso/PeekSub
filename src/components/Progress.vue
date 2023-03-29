@@ -6,15 +6,16 @@
       max: { type: Number },
     },
     computed: {
-      widthStyle() {
-        return `width: ${((this.currentTime * 100) / this.max).toFixed(1)}%`;
+      rightStyle() {
+        return `--percent-right: ${(
+          100 -
+          (100 * this.currentTime) / this.max
+        ).toFixed(1)}%`;
       },
     },
   };
 </script>
 
 <template>
-  <div class="progress bg-secondary" role="progressbar">
-    <div class="progress-bar bg-secondary-subtle" :style="widthStyle"></div>
-  </div>
+  <div class="progresss" role="progressbar" :style="rightStyle"></div>
 </template>

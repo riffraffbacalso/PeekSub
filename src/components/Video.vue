@@ -42,33 +42,24 @@
 </script>
 
 <template>
-  <div class="app-container">
-    <div class="video-container">
-      <video
-        ref="vid"
-        class="video"
-        @loadedmetadata="onLoad"
-        @timeupdate="onUpdate"
-        @ended="onEnd"
-      >
-        <source src="../assets/rocks.mp4" type="video/mp4" />
-      </video>
-      <p class="subtitles" contenteditable="true">
-        It's interesting, the ghosts
-      </p>
+  <div class="video-container">
+    <video
+      ref="vid"
+      class="video"
+      @loadedmetadata="onLoad"
+      @timeupdate="onUpdate"
+      @ended="onEnd"
+    >
+      <source src="../assets/rocks.mp4" type="video/mp4" />
+    </video>
+    <p class="subtitles" contenteditable="true">It's interesting, the ghosts</p>
+  </div>
+  <div class="controls">
+    <div class="play-pause-container">
+      <PlayPauseButton :isPaused="isPaused" :onClick="playPause" />
     </div>
-    <div class="controls">
-      <div class="play-pause-container">
-        <PlayPauseButton :isPaused="isPaused" :onClick="playPause" />
-      </div>
-      <div class="progress-container">
-        <Progress
-          :currentTime="currentTime"
-          :min="0"
-          :max="duration"
-          label=""
-        />
-      </div>
+    <div class="progress-container">
+      <Progress :currentTime="currentTime" :min="0" :max="duration" label="" />
     </div>
   </div>
 </template>
