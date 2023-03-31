@@ -8,4 +8,5 @@
 
 <template>
   <Video ref="vid" />
+  <div class="clips"></div>
 </template>

@@ -2,12 +2,9 @@
 
 body {
   margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #2c3639;
+  background-color: #3f4e4f;
 }
 
 button {
@@ -26,26 +23,38 @@ button:focus-visible {
   outline: 2px solid lightgray;
 }
 
-.app {
-  max-width: 50%;
-  max-height: 50%;
-  padding-right: 0.75rem;
-  padding-left: 0.75rem;
+#app {
+  min-width: 100vw;
+  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   margin-right: auto;
   margin-left: auto;
+  
+  display: grid;
+}
 
-  outline: 1px solid black;
+.clips {
+  min-width: 30vw;
+  min-height: 100vh;
+  
+  grid-column: 2;
+  grid-row: 1 / 3;
+  
+  background-color: #2c3639;
+  outline: 1px dashed white;
 }
 
 .video-container {
   display: flex;
-  width: 100%;
-  height: 100%;
+  min-width: 50vw;
+  height: 50vh;
   position: relative;
   padding-right: 0;
   padding-left: 0;
 
-  outline: 1px solid black;
+  background-color: black;
+  outline: 1px dashed white;
 }
 
 .video {
@@ -75,6 +84,11 @@ button:focus-visible {
   display: flex;
   flex-wrap: wrap;
   padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  height: fit-content;
+
+  outline: 1px dashed white;
 }
 
 .play-pause-container {
@@ -83,18 +97,24 @@ button:focus-visible {
 }
 
 .progress-container {
+  display: flex;
   flex: 1 0 0;
   align-self: center;
+  height: 7px;
   margin-left: 0.25rem;
   margin-right: 0.25rem;
+  cursor: pointer;
+
+  outline: 1px dashed red;
 }
 
 .progresss {
+  flex: 1 0 0;
+  align-self: center;
   height: 2px;
   overflow: hidden;
   background-color: gray;
   border-radius: 0.375rem;
-  cursor: pointer;
   position: relative;
 }
 
