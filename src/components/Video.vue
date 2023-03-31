@@ -32,6 +32,10 @@
         else this.vid.pause();
         this.isPaused = !this.isPaused;
       },
+      seek(time) {
+        this.vid.currentTime = time;
+        this.currentTime = time;
+      },
     },
     mounted() {
       this.vid = this.$refs.vid;
@@ -59,7 +63,12 @@
       <PlayPauseButton :isPaused="isPaused" :onClick="playPause" />
     </div>
     <div class="progress-container">
-      <Progress :currentTime="currentTime" :min="0" :max="duration" label="" />
+      <Progress
+        :currentTime="currentTime"
+        :start="0"
+        :end="duration"
+        :seek="seek"
+      />
     </div>
   </div>
 </template>
