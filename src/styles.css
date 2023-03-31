@@ -14,6 +14,7 @@ button {
   height: 24px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 button:hover svg {
@@ -107,7 +108,7 @@ button:focus-visible {
   outline: 1px dashed red;
 }
 
-.progresss {
+.progress {
   flex: 1 0 0;
   align-self: center;
   height: 2px;
@@ -117,7 +118,7 @@ button:focus-visible {
   position: relative;
 }
 
-.progresss:after {
+.progress:after {
   content: "";
   position: absolute;
   top: 0;
@@ -127,7 +128,7 @@ button:focus-visible {
   background-color: white;
 }
 
-div:hover > .progresss {
+.progress-container:hover > .progress {
   height: 7px;
   transition: 0.25s;
 }

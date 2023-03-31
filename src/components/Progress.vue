@@ -24,8 +24,10 @@
     methods: {
       onMouseDown(e) {
         this.isMouseDown = true;
-        let mouseX = e.clientX;
-        let time = (this.end * (mouseX - this.left)) / this.width;
+        let rect = this.$refs.progress.getBoundingClientRect();
+        this.left = rect.left;
+        this.width = rect.right - rect.left;
+        let time = (this.end * (e.clientX - this.left)) / this.width;
         this.seek(time);
       },
       onMouseUp() {
@@ -33,15 +35,9 @@
       },
       onMouseMove(e) {
         if (!this.isMouseDown) return;
-        let mouseX = e.clientX;
-        let time = (this.end * (mouseX - this.left)) / this.width;
+        let time = (this.end * (e.clientX - this.left)) / this.width;
         this.seek(time);
       },
-    },
-    mounted() {
-      let rect = this.$refs.progress.getBoundingClientRect();
-      this.left = rect.left;
-      this.width = rect.right - rect.left;
     },
   };
 </script>
@@ -49,7 +45,7 @@
 <template>
   <div
     ref="progress"
-    class="progresss"
+    class="progress"
     role="progressbar"
     :style="rightStyle"
     @mousedown="onMouseDown"
