@@ -1,10 +1,10 @@
 <script>
+  import { mapActions, mapState } from "pinia";
+  import { useVideoStore } from "../store";
+
   export default {
     props: {
-      currentTime: Number,
-      start: Number,
-      end: Number,
-      seek: Function,
+      start: Number = 0,
     },
     data() {
       return {
@@ -14,29 +14,31 @@
       };
     },
     computed: {
+      ...mapState(useVideoStore, ["currentTime", "duration"]),
       rightStyle() {
         return `--percent-right: ${(
           100 -
-          (100 * this.currentTime) / this.end
+          (100 * this.currentTime) / this.duration
         ).toFixed(1)}%`;
       },
     },
     methods: {
+      ...mapActions(useVideoStore, ["seek"]),
       onMouseDown(e) {
         this.isMouseDown = true;
         let rect = this.$refs.progress.getBoundingClientRect();
         this.left = rect.left;
         this.width = rect.right - rect.left;
-        let time = (this.end * (e.clientX - this.left)) / this.width;
+        let time = (this.duration * (e.clientX - this.left)) / this.width;
+        this.seek(time);
+      },
+      onMouseMove(e) {
+        if (!this.isMouseDown) return;
+        let time = (this.duration * (e.clientX - this.left)) / this.width;
         this.seek(time);
       },
       onMouseUp() {
         this.isMouseDown = false;
-      },
-      onMouseMove(e) {
-        if (!this.isMouseDown) return;
-        let time = (this.end * (e.clientX - this.left)) / this.width;
-        this.seek(time);
       },
     },
   };
