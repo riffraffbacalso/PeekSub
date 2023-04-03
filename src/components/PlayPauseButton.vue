@@ -5,16 +5,9 @@
   import PlaySvg from "../assets/play.svg?component";
 
   export default {
-    components: {
-      PauseSvg,
-      PlaySvg,
-    },
-    computed: {
-      ...mapWritableState(useVideoStore, ["isPaused"]),
-    },
-    methods: {
-      ...mapActions(useVideoStore, ["playPause"]),
-    },
+    components: { PauseSvg, PlaySvg },
+    computed: { ...mapWritableState(useVideoStore, ["isPaused"]) },
+    methods: { ...mapActions(useVideoStore, ["playPause"]) },
   };
 </script>
 
@@ -24,3 +17,10 @@
     <PlaySvg v-show="isPaused" />
   </button>
 </template>
+
+<style>
+  .play-pause-container {
+    flex: 0 0 auto;
+    width: auto;
+  }
+</style>

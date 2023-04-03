@@ -4,7 +4,7 @@
 
   export default {
     props: {
-      start: Number = 0,
+      start: (Number = 0),
     },
     data() {
       return {
@@ -48,10 +48,48 @@
   <div
     ref="progress"
     class="progress"
-    role="progressbar"
     :style="rightStyle"
     @mousedown="onMouseDown"
     @mouseup="onMouseUp"
     @mousemove="onMouseMove"
-  ></div>
+  />
 </template>
+
+<style>
+  .progress-container {
+    display: flex;
+    /* flex: 1 0 0; */
+    /* align-self: center; */
+    height: 7px;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    cursor: pointer;
+
+    outline: 1px dashed red;
+  }
+
+  .progress {
+    flex: 1 0 0;
+    align-self: center;
+    height: 2px;
+    overflow: hidden;
+    background-color: gray;
+    border-radius: 0.375rem;
+    position: relative;
+  }
+
+  .progress:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: var(--percent-right);
+    background-color: white;
+  }
+
+  .progress-container:hover > .progress {
+    height: 7px;
+    transition: 0.25s;
+  }
+</style>

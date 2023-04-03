@@ -2,8 +2,9 @@ import { defineStore } from "pinia";
 
 export const useVideoStore = defineStore("video", {
   state: () => ({
-    vidEl: null,
-    isPaused: null,
+    videoEl: null,
+    isLoop: false,
+    isPaused: true,
     currentTime: null,
     duration: null,
   }),
@@ -12,6 +13,10 @@ export const useVideoStore = defineStore("video", {
       if (this.videoEl.paused) this.videoEl.play();
       else this.videoEl.pause();
       this.isPaused = !this.isPaused;
+    },
+    toggleLoop() {
+      this.videoEl.loop = !this.videoEl.loop
+      this.isLoop = !this.isLoop;
     },
     seek(time) {
       this.videoEl.currentTime = time;
