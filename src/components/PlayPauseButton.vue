@@ -1,12 +1,12 @@
 <script>
-  import { mapActions, mapWritableState } from "pinia";
+  import { mapActions, mapState } from "pinia";
   import { useVideoStore } from "../store";
   import PauseSvg from "../assets/pause.svg?component";
   import PlaySvg from "../assets/play.svg?component";
 
   export default {
     components: { PauseSvg, PlaySvg },
-    computed: { ...mapWritableState(useVideoStore, ["isPaused"]) },
+    computed: { ...mapState(useVideoStore, ["isPaused"]) },
     methods: { ...mapActions(useVideoStore, ["playPause"]) },
   };
 </script>
@@ -17,10 +17,3 @@
     <PlaySvg v-show="isPaused" />
   </button>
 </template>
-
-<style>
-  .play-pause-container {
-    flex: 0 0 auto;
-    width: auto;
-  }
-</style>

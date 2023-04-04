@@ -15,12 +15,12 @@
     <Progress />
   </div>
   <div class="controls">
-    <div class="play-pause-container">
-      <PlayPauseButton />
-    </div>
-    <div class="play-pause-container">
-      <LoopButton />
-    </div>
+    <!-- <div class="button-container"> -->
+    <PlayPauseButton />
+    <!-- </div> -->
+    <!-- <div class="button-container"> -->
+    <LoopButton />
+    <!-- </div> -->
   </div>
   <div class="clips-container"></div>
 </template>

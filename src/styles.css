@@ -43,10 +43,14 @@ button:focus-visible {
   justify-content: center;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  /* height: fit-content; */
 
   grid-column: 1;
   grid-row: 3;
 
   outline: 1px dashed red;
 }
+
+/* .button-container {
+  flex: 0 0 auto;
+  width: auto;
+} */
