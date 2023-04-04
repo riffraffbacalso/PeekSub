@@ -4,7 +4,7 @@
 
   export default {
     props: {
-      start: (Number = 0),
+      start: { type: Number, default: 0 },
     },
     data() {
       return {
@@ -40,11 +40,14 @@
       ...mapActions(useVideoStore, ["seek"]),
       onMouseDown(e) {
         this.isMouseDown = true;
-        let time = (this.duration * (e.clientX - this.left)) / this.width;
+        let time =
+          this.duration * ((e.clientX - this.left) / this.width) + this.start;
         this.seek(time);
       },
       onMouseMove(e) {
-        let time = (this.duration * (e.clientX - this.left)) / this.width;
+        if (!this.isMouseOver) return;
+        let time =
+          this.duration * ((e.clientX - this.left) / this.width) + this.start;
         this.hoveredTime = time;
         if (this.isMouseDown) this.seek(time);
       },
