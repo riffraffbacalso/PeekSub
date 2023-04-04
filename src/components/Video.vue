@@ -57,7 +57,7 @@
     padding-left: 0;
 
     background-color: black;
-    outline: 1px dashed white;
+    /* outline: 1px dashed white; */
   }
 
   .video {

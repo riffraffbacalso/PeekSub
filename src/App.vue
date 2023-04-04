@@ -11,9 +11,6 @@
 
 <template>
   <Video />
-  <div class="progress-container">
-    <Progress />
-  </div>
   <div class="controls">
     <!-- <div class="button-container"> -->
     <PlayPauseButton />
@@ -21,6 +18,9 @@
     <!-- <div class="button-container"> -->
     <LoopButton />
     <!-- </div> -->
+  </div>
+  <div class="progress-container">
+    <Progress />
   </div>
   <div class="clips-container"></div>
 </template>
@@ -33,5 +33,7 @@
     margin-left: auto;
 
     display: grid;
+    grid-template-rows: 80vh 10vh 10vh;
+    grid-template-columns: 70vw 30vw;
   }
 </style>
