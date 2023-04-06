@@ -1,10 +1,12 @@
 <script>
-  import { mapWritableState } from "pinia";
+  import { mapState, mapWritableState } from "pinia";
   import { useVideoStore } from "../store";
 
   export default {
     computed: {
+      ...mapState(useVideoStore, ["videoSrc"]),
       ...mapWritableState(useVideoStore, [
+        "videoSrc",
         "videoEl",
         "isPaused",
         "currentTime",
@@ -24,6 +26,12 @@
         this.currentTime = 0;
       },
     },
+    watch: {
+      videoSrc() {
+        this.videoEl.load();
+        this.isPaused = true;
+      },
+    },
     mounted() {
       this.videoEl = this.$refs.videoEl;
       this.isPaused = this.videoEl.paused;
@@ -33,7 +41,6 @@
 </script>
 
 <template>
-  <div class="video-container">
     <video
       ref="videoEl"
       class="video"
@@ -41,10 +48,10 @@
       @timeupdate="onUpdate"
       @ended="onEnd"
     >
+      <source :src="videoSrc" type="video/mp4" />
       <source src="../assets/rocks.mp4" type="video/mp4" />
     </video>
     <p class="subtitles" contenteditable="true">It's interesting, the ghosts</p>
-  </div>
 </template>
 
 <style>

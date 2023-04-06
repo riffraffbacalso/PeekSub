@@ -12,7 +12,8 @@
         width: null,
         isMouseDown: false,
         isMouseOver: false,
-        offsetTime: 0,
+        indicatorPos: 0,
+        indicatorTime: 0,
       };
     },
     computed: {
@@ -24,14 +25,11 @@
           (100 * this.currentTime) / this.duration
         ).toFixed(1)}%`;
       },
-      timeStyle() {
-        return `right: ${(
-          100 -
-          (100 * this.offsetTime) / this.duration
-        ).toFixed(1)}%`;
+      indicatorStyle() {
+        return `right: ${(100 - 100 * this.indicatorPos).toFixed(1)}%`;
       },
       hoveredTime() {
-        let actualTime = this.offsetTime + this.start;
+        let actualTime = this.indicatorTime + this.start;
         let hrs = Math.floor(actualTime / 3600);
         let mins = Math.floor((actualTime % 3600) / 60);
         let secs = Math.floor(actualTime % 60);
@@ -43,13 +41,15 @@
       ...mapActions(useVideoStore, ["seek"]),
       onMouseDown(e) {
         this.isMouseDown = true;
-        let time = this.duration * ((e.clientX - this.left) / this.width);
+        this.indicatorPos = (e.clientX - this.left) / this.width;
+        let time = this.duration * this.indicatorPos;
         this.seek(time);
       },
       onMouseMove(e) {
         if (!this.isMouseOver) return;
-        let time = this.duration * ((e.clientX - this.left) / this.width);
-        this.offsetTime = time;
+        this.indicatorPos = (e.clientX - this.left) / this.width;
+        let time = this.duration * this.indicatorPos;
+        this.indicatorTime = time;
         if (this.isMouseDown) this.seek(time);
       },
       onMouseUp() {
@@ -60,8 +60,9 @@
         let rect = this.$refs.progress.getBoundingClientRect();
         this.left = rect.left;
         this.width = rect.right - rect.left;
-        let time = (this.duration * (e.clientX - this.left)) / this.width;
-        this.offsetTime = time;
+        this.indicatorPos = (e.clientX - this.left) / this.width;
+        let time = this.duration * this.indicatorPos;
+        this.indicatorTime = time;
       },
       onMouseLeave() {
         this.isMouseOver = false;
@@ -81,7 +82,7 @@
     @mouseover="onMouseOver"
     @mouseleave="onMouseLeave"
   />
-  <span class="progress-time" :style="timeStyle" v-show="isMouseOver">{{
+  <span class="progress-time" :style="indicatorStyle" v-show="isMouseOver">{{
     hoveredTime
   }}</span>
 </template>
