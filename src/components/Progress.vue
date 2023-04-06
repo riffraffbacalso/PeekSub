@@ -38,9 +38,10 @@
       },
     },
     methods: {
-      ...mapActions(useVideoStore, ["seek"]),
+      ...mapActions(useVideoStore, ["playPause", "seek"]),
       onMouseDown(e) {
         this.isMouseDown = true;
+        this.playPause({ hidden: true });
         this.indicatorPos = (e.clientX - this.left) / this.width;
         let time = this.duration * this.indicatorPos;
         this.seek(time);
@@ -54,6 +55,7 @@
       },
       onMouseUp() {
         this.isMouseDown = false;
+        this.playPause({ hidden: true });
       },
       onMouseOver(e) {
         this.isMouseOver = true;

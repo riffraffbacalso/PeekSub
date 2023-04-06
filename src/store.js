@@ -10,10 +10,10 @@ export const useVideoStore = defineStore("video", {
     duration: 0,
   }),
   actions: {
-    playPause() {
+    playPause({ hidden = false }) {
       if (this.videoEl.paused) this.videoEl.play();
       else this.videoEl.pause();
-      this.isPaused = !this.isPaused;
+      if (!hidden) this.isPaused = !this.isPaused;
     },
     toggleLoop() {
       this.videoEl.loop = !this.videoEl.loop;
