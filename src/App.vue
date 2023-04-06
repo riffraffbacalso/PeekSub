@@ -1,7 +1,6 @@
 <script>
   import { mapState } from "pinia";
   import { useVideoStore } from "./store";
-
   import FileInput from "./components/FileInput.vue";
   import LoopButton from "./components/LoopButton.vue";
   import PlayPauseButton from "./components/PlayPauseButton.vue";
@@ -12,25 +11,27 @@
     components: { FileInput, LoopButton, PlayPauseButton, Progress, Video },
     computed: {
       ...mapState(useVideoStore, ["videoSrc"]),
+      srcExists() {
+        return this.videoSrc !== "";
+      },
     },
   };
 </script>
 
 <template>
   <div class="video-container">
-    <Video v-if="videoSrc !== ''" />
-    <div v-else class="video-empty" />
+    <Video v-if="srcExists" />
   </div>
   <div class="controls">
     <!-- <div class="button-container"> -->
-    <PlayPauseButton />
+    <PlayPauseButton :disabled="!srcExists" />
     <!-- </div> -->
     <!-- <div class="button-container"> -->
-    <LoopButton />
+    <LoopButton :disabled="!srcExists" />
     <!-- </div> -->
   </div>
   <div class="progress-container">
-    <Progress />
+    <Progress :isDisabled="!srcExists" />
   </div>
   <div class="clips-container">
     <FileInput />

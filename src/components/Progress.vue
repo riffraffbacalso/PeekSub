@@ -5,6 +5,7 @@
   export default {
     props: {
       start: { type: Number, default: 0 },
+      isDisabled: { type: Boolean, default: false },
     },
     data() {
       return {
@@ -45,12 +46,14 @@
         return this.duration * this.indicatorPos;
       },
       onMouseDown(e) {
+        if (this.isDisabled) return;
         this.hiddenPause();
         this.isScrubbing = true;
         let time = this.calcIndicator(e.clientX);
         this.seek(time);
       },
       onMouseMove(e) {
+        if (this.isDisabled) return;
         let time = this.calcIndicator(e.clientX);
         this.indicatorTime = time;
         if (this.isScrubbing) {
@@ -58,10 +61,12 @@
         }
       },
       onMouseUp() {
+        if (this.isDisabled) return;
         this.hiddenPlay();
         this.isScrubbing = false;
       },
       onMouseOver(e) {
+        if (this.isDisabled) return;
         this.isMouseOver = true;
         let rect = this.$refs.progress.getBoundingClientRect();
         this.left = rect.left;
@@ -70,6 +75,7 @@
         this.indicatorTime = time;
       },
       onMouseLeave() {
+        if (this.isDisabled) return;
         this.isMouseOver = false;
       },
     },
@@ -97,6 +103,7 @@
     ref="progress"
     class="progress"
     :style="afterStyle"
+    :disabled="isDisabled"
     @mousedown.prevent="onMouseDown"
     @mouseup="onMouseUp"
     @mousemove="onMouseMove"
@@ -155,5 +162,9 @@
   .progress-container:hover > .progress {
     height: 7px;
     transition: 0.25s;
+  }
+
+  .progress-container:has(.progress[disabled="true"]) {
+    pointer-events: none;
   }
 </style>
