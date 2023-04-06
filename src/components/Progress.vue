@@ -78,13 +78,17 @@
       document.addEventListener("mousemove", (e) => {
         if (this.isScrubbing) this.onMouseMove(e);
       });
-      document.addEventListener("mouseup", this.onMouseUp);
+      document.addEventListener("mouseup", (e) => {
+        if (this.isScrubbing) this.onMouseUp;
+      });
     },
     unmounted() {
       document.removeEventListener("mousemove", (e) => {
         if (this.isScrubbing) this.onMouseMove(e);
       });
-      document.removeEventListener("mouseup", this.onMouseUp);
+      document.removeEventListener("mouseup", (e) => {
+        if (this.isScrubbing) this.onMouseUp;
+      });
     },
   };
 </script>
