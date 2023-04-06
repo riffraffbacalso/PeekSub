@@ -42,7 +42,6 @@
       calcIndicator(mouseXPos) {
         let posRatio = (mouseXPos - this.left) / this.width;
         this.indicatorPos = Math.min(Math.max(posRatio, 0), 1);
-        console.log(this.indicatorPos);
         return this.duration * this.indicatorPos;
       },
       onMouseDown(e) {
@@ -78,16 +77,16 @@
       document.addEventListener("mousemove", (e) => {
         if (this.isScrubbing) this.onMouseMove(e);
       });
-      document.addEventListener("mouseup", (e) => {
-        if (this.isScrubbing) this.onMouseUp;
+      document.addEventListener("mouseup", () => {
+        if (this.isScrubbing) this.onMouseUp();
       });
     },
     unmounted() {
       document.removeEventListener("mousemove", (e) => {
         if (this.isScrubbing) this.onMouseMove(e);
       });
-      document.removeEventListener("mouseup", (e) => {
-        if (this.isScrubbing) this.onMouseUp;
+      document.removeEventListener("mouseup", () => {
+        if (this.isScrubbing) this.onMouseUp();
       });
     },
   };
