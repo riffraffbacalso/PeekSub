@@ -10,8 +10,8 @@
       return {
         left: null,
         width: null,
-        isMouseDown: false,
         isMouseOver: false,
+        isScrubbing: false,
         indicatorPos: 0,
         indicatorTime: 0,
       };
@@ -38,37 +38,53 @@
       },
     },
     methods: {
-      ...mapActions(useVideoStore, ["playPause", "seek"]),
+      ...mapActions(useVideoStore, ["hiddenPause", "hiddenPlay", "seek"]),
+      calcIndicator(mouseXPos) {
+        let posRatio = (mouseXPos - this.left) / this.width;
+        this.indicatorPos = Math.min(Math.max(posRatio, 0), 1);
+        console.log(this.indicatorPos);
+        return this.duration * this.indicatorPos;
+      },
       onMouseDown(e) {
-        this.isMouseDown = true;
-        this.playPause({ hidden: true });
-        this.indicatorPos = (e.clientX - this.left) / this.width;
-        let time = this.duration * this.indicatorPos;
+        this.hiddenPause();
+        this.isScrubbing = true;
+        let time = this.calcIndicator(e.clientX);
         this.seek(time);
       },
       onMouseMove(e) {
-        if (!this.isMouseOver) return;
-        this.indicatorPos = (e.clientX - this.left) / this.width;
-        let time = this.duration * this.indicatorPos;
+        let time = this.calcIndicator(e.clientX);
         this.indicatorTime = time;
-        if (this.isMouseDown) this.seek(time);
+        if (this.isScrubbing) {
+          this.seek(time);
+        }
       },
       onMouseUp() {
-        this.isMouseDown = false;
-        this.playPause({ hidden: true });
+        this.hiddenPlay();
+        this.isScrubbing = false;
       },
       onMouseOver(e) {
         this.isMouseOver = true;
         let rect = this.$refs.progress.getBoundingClientRect();
         this.left = rect.left;
         this.width = rect.right - rect.left;
-        this.indicatorPos = (e.clientX - this.left) / this.width;
-        let time = this.duration * this.indicatorPos;
+        let time = this.calcIndicator(e.clientX);
         this.indicatorTime = time;
       },
       onMouseLeave() {
         this.isMouseOver = false;
       },
+    },
+    mounted() {
+      document.addEventListener("mousemove", (e) => {
+        if (this.isScrubbing) this.onMouseMove(e);
+      });
+      document.addEventListener("mouseup", this.onMouseUp);
+    },
+    unmounted() {
+      document.removeEventListener("mousemove", (e) => {
+        if (this.isScrubbing) this.onMouseMove(e);
+      });
+      document.removeEventListener("mouseup", this.onMouseUp);
     },
   };
 </script>
@@ -78,15 +94,18 @@
     ref="progress"
     class="progress"
     :style="afterStyle"
-    @mousedown="onMouseDown"
+    @mousedown.prevent="onMouseDown"
     @mouseup="onMouseUp"
     @mousemove="onMouseMove"
     @mouseover="onMouseOver"
     @mouseleave="onMouseLeave"
   />
-  <span class="progress-time" :style="indicatorStyle" v-show="isMouseOver">{{
-    hoveredTime
-  }}</span>
+  <span
+    class="progress-time"
+    :style="indicatorStyle"
+    v-show="isMouseOver || isScrubbing"
+    >{{ hoveredTime }}</span
+  >
 </template>
 
 <style>
