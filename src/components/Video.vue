@@ -49,7 +49,6 @@
       @ended="onEnd"
     >
       <source :src="videoSrc" type="video/mp4" />
-      <source src="../assets/rocks.mp4" type="video/mp4" />
     </video>
     <p class="subtitles" contenteditable="true">It's interesting, the ghosts</p>
 </template>
