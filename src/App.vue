@@ -49,19 +49,4 @@
     grid-template-rows: 80vh 10vh 10vh;
     grid-template-columns: 70vw 30vw;
   }
-
-  input[type="file"] {
-    display: none;
-  }
-
-  label {
-    border-radius: 2px;
-    padding: 5px 15px;
-    margin: 10px;
-    color: lightgray;
-    font-size: 0.75rem;
-    background-color: #3f4e4f;
-    display: inline-block;
-    cursor: pointer;
-  }
 </style>
