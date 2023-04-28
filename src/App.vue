@@ -33,8 +33,11 @@
   <div class="progress-container">
     <Progress :isDisabled="!srcExists" />
   </div>
-  <div class="clips-container">
-    <FileInput />
+  <div class="right-column">
+    <header class="file-input-group">
+      <FileInput />
+    </header>
+    <div class="clips-container"></div>
   </div>
 </template>
 
@@ -49,4 +52,70 @@
     grid-template-rows: 80vh 10vh 10vh;
     grid-template-columns: 70vw 30vw;
   }
+
+  .video-container {
+    display: flex;
+    width: 70vw;
+    height: 80vh;
+    position: relative;
+    padding-right: 0;
+    padding-left: 0;
+    background-color: black;
+
+    grid-column: 1;
+    grid-row: 1;
+
+    /* outline: 1px dashed white; */
+  }
+
+  .controls {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    grid-column: 1;
+    grid-row: 2;
+
+    /* outline: 1px dashed red; */
+  }
+
+  .progress-container {
+    display: flex;
+    position: relative;
+    height: 7px;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+    cursor: pointer;
+
+    grid-column: 1;
+    grid-row: 3;
+
+    /* outline: 1px dashed red; */
+  }
+
+  .right-column {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    width: 30vw;
+    background-color: #2c3639;
+  }
+
+  .file-input-group {
+    height: 5vh;
+    box-shadow: 5px 0px 5px;
+    display: flex;
+    align-items: center;
+  }
+
+  .clips-container {
+    height: 95vh;
+    /* outline: 1px dashed white; */
+  }
+
+  /* .button-container {
+    flex: 0 0 auto;
+    width: auto;
+  } */
 </style>

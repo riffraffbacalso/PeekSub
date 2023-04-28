@@ -119,17 +119,6 @@
 </template>
 
 <style>
-  .progress-container {
-    display: flex;
-    position: relative;
-    height: 7px;
-    margin-left: 0.75rem;
-    margin-right: 0.75rem;
-    cursor: pointer;
-
-    /* outline: 1px dashed red; */
-  }
-
   .progress {
     flex: 1 0 0;
     align-self: center;

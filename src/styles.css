@@ -26,39 +26,9 @@ button:focus-visible {
 }
 
 button[disabled] {
-  pointer-events:none;
+  pointer-events: none;
 }
 
 button[disabled] svg {
   stroke: darkgray;
 }
-
-.clips-container {
-  position: relative;
-  width: 30vw;
-  height: 100vh;
-
-  grid-column: 2;
-  grid-row: 1 / 4;
-
-  background-color: #2c3639;
-  /* outline: 1px dashed white; */
-}
-
-.controls {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-
-  grid-column: 1;
-  grid-row: 2;
-
-  /* outline: 1px dashed red; */
-}
-
-/* .button-container {
-  flex: 0 0 auto;
-  width: auto;
-} */
