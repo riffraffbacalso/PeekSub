@@ -117,6 +117,21 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.16.17.tgz#c5a1a4bfe1b57f0c3e61b29883525c6da3e5c091"
   integrity sha512-y+EHuSchhL7FjHgvQL/0fnnFmO4T1bhvWANX6gcnqTjtnKWbTvUMCpGnv2+t+31d7RzyEAYAd4u2fnIhHL6N/Q==
 
+"@ffmpeg/core@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@ffmpeg/core/-/core-0.11.0.tgz#fc24fe5af587f83cd2575d0e45de455d8eed9ba9"
+  integrity sha512-9Tt/+2PMpkGPXUK8n6He9G8Y+qR6qmCPSCw9iEKZxHHOvJ9BE/r0Fccj+YgDZTlyu6rXxc9x6EqCaFBIt7qzjA==
+
+"@ffmpeg/ffmpeg@^0.11.6":
+  version "0.11.6"
+  resolved "https://registry.yarnpkg.com/@ffmpeg/ffmpeg/-/ffmpeg-0.11.6.tgz#9cbe42dfb5132fca74ae5570ebeee2341f8c6e51"
+  integrity sha512-uN8J8KDjADEavPhNva6tYO9Fj0lWs9z82swF3YXnTxWMBoFLGq3LZ6FLlIldRKEzhOBKnkVfA8UnFJuvGvNxcA==
+  dependencies:
+    is-url "^1.2.4"
+    node-fetch "^2.6.1"
+    regenerator-runtime "^0.13.7"
+    resolve-url "^0.2.1"
+
 "@trysound/sax@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
@@ -368,6 +383,11 @@ is-core-module@^2.9.0:
   dependencies:
     has "^1.0.3"
 
+is-url@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/is-url/-/is-url-1.2.4.tgz#04a4df46d28c4cff3d73d01ff06abeb318a1aa52"
+  integrity sha512-ITvGim8FhRiYe4IQ5uHSkj7pVaPDrCTkNd3yq3cV7iZAcJdHTUMPMEHcqSOy9xZ9qFenQCvi+2wjH9a1nXqHww==
+
 magic-string@^0.25.7:
   version "0.25.9"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.9.tgz#de7f9faf91ef8a1c91d02c2e5314c8277dbcdd1c"
@@ -389,6 +409,13 @@ nanoid@^3.3.4:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
   integrity sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==
+
+node-fetch@^2.6.1:
+  version "2.6.9"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.9.tgz#7c7f744b5cc6eb5fd404e0c7a9fec630a55657e6"
+  integrity sha512-DJm/CJkZkRjKKj4Zi4BsKVZh3ValV5IR5s7LVZnW+6YMh0W1BfNA8XSs6DLMGYlId5F3KnA70uu2qepcR08Qqg==
+  dependencies:
+    whatwg-url "^5.0.0"
 
 nth-check@^2.0.1:
   version "2.1.1"
@@ -423,6 +450,16 @@ postcss@^8.1.10, postcss@^8.4.21:
     nanoid "^3.3.4"
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
+
+regenerator-runtime@^0.13.7:
+  version "0.13.11"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
+  integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
+
+resolve-url@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
+  integrity sha512-ZuF55hVUQaaczgOIwqWzkEcEidmlD/xl44x1UZnhOXcYuFN2S6+rcxpG+C1N3So0wvNI3DmJICUFfu2SxhBmvg==
 
 resolve@^1.22.1:
   version "1.22.1"
@@ -472,6 +509,16 @@ svgo@^3.0.2:
     csso "^5.0.5"
     picocolors "^1.0.0"
 
+tr46@~0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
+  integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
+
+vite-plugin-cross-origin-isolation@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/vite-plugin-cross-origin-isolation/-/vite-plugin-cross-origin-isolation-0.1.6.tgz#1bde75138ad318da0060cf635a14f3f85d5efb64"
+  integrity sha512-OY0naW9nPUDrKTffYnY7FRYXOgZdHoNwMGpPxUmj/n32mGZi01fcq+J536jkmwGWX7DLT95XBQVHHbrAJzTvrw==
+
 vite-svg-loader@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/vite-svg-loader/-/vite-svg-loader-4.0.0.tgz#1cec4337dba3c23ab13bcabb111896e251b047ac"
@@ -507,3 +554,16 @@ vue@^3.2.45:
     "@vue/runtime-dom" "3.2.47"
     "@vue/server-renderer" "3.2.47"
     "@vue/shared" "3.2.47"
+
+webidl-conversions@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
+  integrity sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==
+
+whatwg-url@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
+  integrity sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==
+  dependencies:
+    tr46 "~0.0.3"
+    webidl-conversions "^3.0.0"

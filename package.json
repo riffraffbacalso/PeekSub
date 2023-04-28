@@ -9,12 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ffmpeg/core": "^0.11.0",
+    "@ffmpeg/ffmpeg": "^0.11.6",
     "pinia": "^2.0.33",
     "vue": "^3.2.45"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
     "vite": "^4.1.0",
+    "vite-plugin-cross-origin-isolation": "^0.1.6",
     "vite-svg-loader": "^4.0.0"
   }
 }
