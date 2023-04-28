@@ -103,14 +103,15 @@
   }
 
   .file-input-group {
-    height: 5vh;
+    height: 40px;
     box-shadow: 5px 0px 5px;
     display: flex;
     align-items: center;
   }
 
   .clips-container {
-    height: 95vh;
+    display: flex;
+    /* height: 95vh; */
     /* outline: 1px dashed white; */
   }
 
