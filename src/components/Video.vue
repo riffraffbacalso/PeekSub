@@ -6,7 +6,6 @@
     computed: {
       ...mapState(useVideoStore, ["videoSrc"]),
       ...mapWritableState(useVideoStore, [
-        "videoSrc",
         "videoEl",
         "isPaused",
         "currentTime",

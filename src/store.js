@@ -9,6 +9,11 @@ export const useVideoStore = defineStore("video", {
     currentTime: 0,
     duration: 0,
   }),
+  getters: {
+    srcExists() {
+      return this.videoSrc !== "";
+    },
+  },
   actions: {
     hiddenPause() {
       this.videoEl.pause();

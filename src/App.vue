@@ -10,10 +10,7 @@
   export default {
     components: { FileInput, LoopButton, PlayPauseButton, Progress, Video },
     computed: {
-      ...mapState(useVideoStore, ["videoSrc"]),
-      srcExists() {
-        return this.videoSrc !== "";
-      },
+      ...mapState(useVideoStore, ["srcExists"]),
     },
   };
 </script>
