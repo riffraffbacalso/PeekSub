@@ -81,8 +81,8 @@
     position: relative;
     display: flex;
     height: 7px;
-    margin-right: 0.75rem;
-    margin-left: 0.75rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
     cursor: pointer;
     grid-column: 1;
     grid-row: 3;
