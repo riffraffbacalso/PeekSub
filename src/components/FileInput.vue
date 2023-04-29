@@ -39,7 +39,7 @@
 
   label {
     display: inline-block;
-    flex-grow: 1;
+    width: calc(50% - 45px);
     padding: 5px 15px;
     border-radius: 2px;
     margin: 10px;
@@ -50,11 +50,6 @@
     text-align: center;
   }
 
-  label:first-child {
-    margin-right: 5px;
-  }
 
-  label:last-child {
-    margin-left: 5px;
   }
 </style>

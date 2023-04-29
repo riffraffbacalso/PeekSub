@@ -40,6 +40,7 @@
     display: flex;
     height: 40px;
     align-items: center;
+    justify-content: space-evenly;
     box-shadow: 5px 0px 5px;
   }
 </style>
