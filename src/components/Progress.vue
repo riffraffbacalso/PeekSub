@@ -120,32 +120,32 @@
 
 <style>
   .progress {
+    position: relative;
+    overflow: hidden;
+    height: 2px;
     flex: 1 0 0;
     align-self: center;
-    height: 2px;
-    overflow: hidden;
-    background-color: gray;
     border-radius: 0.375rem;
-    position: relative;
+    background-color: gray;
   }
 
   .progress:after {
-    content: "";
     position: absolute;
     top: 0;
+    right: var(--percent-right);
     bottom: 0;
     left: 0;
-    right: var(--percent-right);
     background-color: white;
+    content: "";
   }
 
   .progress-time {
     position: absolute;
-    bottom: 10px;
-    transform: translateX(50%);
-    font-size: 0.75rem;
-    color: white;
     z-index: 1;
+    bottom: 10px;
+    color: white;
+    font-size: 0.75rem;
+    transform: translateX(50%);
   }
 
   .progress-container:hover > .progress {

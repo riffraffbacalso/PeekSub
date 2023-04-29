@@ -46,13 +46,13 @@
   }
 
   label {
-    border-radius: 2px;
-    padding: 5px 15px;
-    margin: 10px;
-    color: lightgray;
-    font-size: 0.75rem;
-    background-color: #3f4e4f;
     display: inline-block;
+    padding: 5px 15px;
+    border-radius: 2px;
+    margin: 10px;
+    background-color: #3f4e4f;
+    color: lightgray;
     cursor: pointer;
+    font-size: 0.75rem;
   }
 </style>

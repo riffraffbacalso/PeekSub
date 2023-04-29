@@ -43,28 +43,25 @@
 
 <style>
   #app {
+    display: grid;
     width: 100vw;
     height: 100vh;
     margin-right: auto;
     margin-left: auto;
-
-    display: grid;
-    grid-template-rows: 80vh 10vh 10vh;
     grid-template-columns: 70vw 30vw;
+    grid-template-rows: 80vh 10vh 10vh;
   }
 
   .video-container {
+    position: relative;
     display: flex;
     width: 70vw;
     height: 80vh;
-    position: relative;
     padding-right: 0;
     padding-left: 0;
     background-color: black;
-
     grid-column: 1;
     grid-row: 1;
-
     /* outline: 1px dashed white; */
   }
 
@@ -74,39 +71,35 @@
     justify-content: center;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-
     grid-column: 1;
     grid-row: 2;
-
     /* outline: 1px dashed red; */
   }
 
   .progress-container {
-    display: flex;
     position: relative;
+    display: flex;
     height: 7px;
-    margin-left: 0.75rem;
     margin-right: 0.75rem;
+    margin-left: 0.75rem;
     cursor: pointer;
-
     grid-column: 1;
     grid-row: 3;
-
     /* outline: 1px dashed red; */
   }
 
   .right-column {
-    grid-column: 2;
-    grid-row: 1 / 4;
     width: 30vw;
     background-color: #2c3639;
+    grid-column: 2;
+    grid-row: 1 / 4;
   }
 
   .file-input-group {
-    height: 40px;
-    box-shadow: 5px 0px 5px;
     display: flex;
+    height: 40px;
     align-items: center;
+    box-shadow: 5px 0px 5px;
   }
 
   .clips-container {
