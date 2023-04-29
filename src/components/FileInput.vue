@@ -1,43 +1,35 @@
 <script>
-  import { mapWritableState } from "pinia";
-  import { useVideoStore } from "../store";
-  import { extractFrames } from "../util/videoFrames";
-
   export default {
+    props: {
+      filetype: { type: String, required: true },
+      acceptStr: { type: String, required: true },
+      updateSrc: { type: Function, required: true },
+    },
     data() {
       return {
         inputEl: null,
-        filename: "",
+        labelText: `Select ${this.filetype}`,
         testImg: null,
       };
     },
-    computed: {
-      ...mapWritableState(useVideoStore, ["videoSrc"]),
-      labelText() {
-        return this.filename === "" ? "Select Video" : this.filename;
-      },
-    },
     methods: {
-      async onChange() {
-        this.filename = this.inputEl.files[0].name;
-        this.videoSrc = URL.createObjectURL(this.inputEl.files[0]);
-
-        this.testImg = await extractFrames(this.videoSrc, "00:00:10");
+      onChange() {
+        this.labelText = this.inputEl.files[0].name;
+        this.updateSrc(URL.createObjectURL(this.inputEl.files[0]));
       },
     },
     mounted() {
-      this.isMounted = true;
       this.inputEl = this.$refs.inputEl;
     },
   };
 </script>
 
 <template>
+  <!-- TODO: change from label tag for accesibility -->
   <label>
     {{ labelText }}
-    <input ref="inputEl" type="file" accept="video/*" @change="onChange" />
+    <input ref="inputEl" type="file" :accept="acceptStr" @change="onChange" />
   </label>
-  <img :src="testImg" width="128" height="72" v-show="testImg" />
 </template>
 
 <style>
@@ -47,6 +39,7 @@
 
   label {
     display: inline-block;
+    flex-grow: 1;
     padding: 5px 15px;
     border-radius: 2px;
     margin: 10px;
@@ -54,5 +47,14 @@
     color: lightgray;
     cursor: pointer;
     font-size: 0.75rem;
+    text-align: center;
+  }
+
+  label:first-child {
+    margin-right: 5px;
+  }
+
+  label:last-child {
+    margin-left: 5px;
   }
 </style>

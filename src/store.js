@@ -36,3 +36,9 @@ export const useVideoStore = defineStore("video", {
     },
   },
 });
+
+export const useSubtitleStore = defineStore("subtitle", {
+  state: () => ({
+    subtitleSrc: "",
+  }),
+});

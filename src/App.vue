@@ -1,14 +1,20 @@
 <script>
   import { mapState } from "pinia";
   import { useVideoStore } from "./store";
-  import FileInput from "./components/FileInput.vue";
+  import FileInputGroup from "./components/FileInputGroup.vue";
   import LoopButton from "./components/LoopButton.vue";
   import PlayPauseButton from "./components/PlayPauseButton.vue";
   import Progress from "./components/Progress.vue";
   import Video from "./components/Video.vue";
 
   export default {
-    components: { FileInput, LoopButton, PlayPauseButton, Progress, Video },
+    components: {
+      FileInputGroup,
+      LoopButton,
+      PlayPauseButton,
+      Progress,
+      Video,
+    },
     computed: {
       ...mapState(useVideoStore, ["srcExists"]),
     },
@@ -31,9 +37,7 @@
     <Progress :isDisabled="!srcExists" />
   </div>
   <div class="right-column">
-    <header class="file-input-group">
-      <FileInput />
-    </header>
+    <FileInputGroup />
     <div class="clips-container"></div>
   </div>
 </template>
@@ -90,13 +94,6 @@
     background-color: #2c3639;
     grid-column: 2;
     grid-row: 1 / 4;
-  }
-
-  .file-input-group {
-    display: flex;
-    height: 40px;
-    align-items: center;
-    box-shadow: 5px 0px 5px;
   }
 
   .clips-container {
