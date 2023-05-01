@@ -1,21 +1,21 @@
 <script>
   export default {
     props: {
-      filetype: { type: String, required: true },
+      fileType: { type: String, required: true },
       acceptStr: { type: String, required: true },
-      updateSrc: { type: Function, required: true },
+      updateFile: { type: Function, required: true },
     },
     data() {
       return {
         inputEl: null,
-        labelText: `Select ${this.filetype}`,
+        labelText: `Select ${this.fileType}`,
         testImg: null,
       };
     },
     methods: {
       onChange() {
         this.labelText = this.inputEl.files[0].name;
-        this.updateSrc(URL.createObjectURL(this.inputEl.files[0]));
+        this.updateFile(this.inputEl.files[0]);
       },
     },
     mounted() {

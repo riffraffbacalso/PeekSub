@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const useVideoStore = defineStore("video", {
   state: () => ({
-    videoSrc: "",
+    videoFile: null,
     videoEl: null,
     isLoop: false,
     isPaused: true,
@@ -10,8 +10,11 @@ export const useVideoStore = defineStore("video", {
     duration: 0,
   }),
   getters: {
-    srcExists() {
-      return this.videoSrc !== "";
+    videoSrc() {
+      return URL.createObjectURL(this.videoFile);
+    },
+    videoUploaded() {
+      return this.videoFile !== null;
     },
   },
   actions: {

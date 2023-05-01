@@ -16,25 +16,25 @@
       Video,
     },
     computed: {
-      ...mapState(useVideoStore, ["srcExists"]),
+      ...mapState(useVideoStore, ["videoUploaded"]),
     },
   };
 </script>
 
 <template>
   <div class="video-container">
-    <Video v-if="srcExists" />
+    <Video v-if="videoUploaded" />
   </div>
   <div class="controls">
     <!-- <div class="button-container"> -->
-    <PlayPauseButton :disabled="!srcExists" />
+    <PlayPauseButton :disabled="!videoUploaded" />
     <!-- </div> -->
     <!-- <div class="button-container"> -->
-    <LoopButton :disabled="!srcExists" />
+    <LoopButton :disabled="!videoUploaded" />
     <!-- </div> -->
   </div>
   <div class="progress-container">
-    <Progress :isDisabled="!srcExists" />
+    <Progress :isDisabled="!videoUploaded" />
   </div>
   <div class="right-column">
     <FileInputGroup />

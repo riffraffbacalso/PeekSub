@@ -6,15 +6,15 @@
   export default {
     components: { FileInput },
     computed: {
-      ...mapWritableState(useVideoStore, ["videoSrc"]),
-      ...mapWritableState(useSubtitleStore, ["subtitleSrc"]),
+      ...mapWritableState(useVideoStore, ["videoFile"]),
+      ...mapWritableState(useSubtitleStore, ["subtitleFile"]),
     },
     methods: {
-      updateVideoSrc(newSrc) {
-        this.videoSrc = newSrc;
+      updateVideoFile(newFile) {
+        this.videoFile = newFile;
       },
-      updateSubtitleSrc(newSrc) {
-        this.subtitleSrc = newSrc;
+      updateSubtitleFile(newFile) {
+        this.subtitleFile = newFile;
       },
     },
   };
@@ -23,14 +23,14 @@
 <template>
   <header class="file-input-group">
     <FileInput
-      filetype="Video"
+      fileType="Video"
       acceptStr="video/*"
-      :updateSrc="updateVideoSrc"
+      :updateFile="updateVideoFile"
     />
     <FileInput
-      filetype="Subtitle"
+      fileType="Subtitle"
       acceptStr=".srt"
-      :updateSrc="updateSubtitleSrc"
+      :updateFile="updateSubtitleFile"
     />
   </header>
 </template>
