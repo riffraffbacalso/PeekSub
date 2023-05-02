@@ -1,6 +1,7 @@
 <script>
   import { mapState } from "pinia";
   import { useVideoStore } from "./store";
+  import ClipList from "./components/ClipList.vue";
   import FileInputGroup from "./components/FileInputGroup.vue";
   import LoopButton from "./components/LoopButton.vue";
   import PlayPauseButton from "./components/PlayPauseButton.vue";
@@ -9,6 +10,7 @@
 
   export default {
     components: {
+      ClipList,
       FileInputGroup,
       LoopButton,
       PlayPauseButton,
@@ -38,7 +40,9 @@
   </div>
   <div class="right-column">
     <FileInputGroup />
-    <div class="clips-container"></div>
+    <div class="clip-list-container">
+      <ClipList />
+    </div>
   </div>
 </template>
 
@@ -96,9 +100,9 @@
     grid-row: 1 / 4;
   }
 
-  .clips-container {
+  .clip-list-container {
     display: flex;
-    /* height: 95vh; */
+    height: calc(100vh - 40px);
     /* outline: 1px dashed white; */
   }
 
