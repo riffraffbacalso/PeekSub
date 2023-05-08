@@ -6,7 +6,7 @@
     data() {
       return {
         clipListEl: null,
-        scrollPos: 0,
+        isScrolled: false,
         content: [],
       };
     },
@@ -14,12 +14,12 @@
       ...mapWritableState(useSubtitleStore, ["subtitleFile"]),
       ...mapWritableState(useVideoStore, ["videoFile", "duration"]),
       shadowStyle() {
-        return this.scrollPos !== 0 ? "box-shadow: 0px 7px 5px -7px inset" : "";
+        return this.isScrolled ? "box-shadow: 0px 7px 5px -7px inset" : "";
       },
     },
     methods: {
       onScroll() {
-        this.scrollPos = this.clipListEl.scrollTop;
+        this.isScrolled = this.clipListEl.scrollTop !== 0;
       },
     },
     watch: {
@@ -52,10 +52,12 @@
 
 <style>
   .clip-list {
+    all: unset;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 40px);
     padding: 20px;
     margin: 0;
+    overflow-x: hidden;
     overflow-y: scroll;
   }
 
