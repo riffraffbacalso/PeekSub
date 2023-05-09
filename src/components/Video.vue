@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
+  import { defineComponent, ComponentPublicInstance as CPI } from "vue";
   import { mapState, mapWritableState } from "pinia";
   import { useVideoStore } from "../store";
 
-  export default {
+  export default defineComponent({
     computed: {
       ...mapState(useVideoStore, ["videoSrc"]),
       ...mapWritableState(useVideoStore, [
@@ -14,11 +15,15 @@
     },
     methods: {
       onLoad() {
-        this.duration = +this.videoEl.duration.toFixed(1);
-        this.currentTime = +this.videoEl.currentTime.toFixed(1);
+        if (this.videoEl) {
+          this.duration = +this.videoEl.duration.toFixed(1);
+          this.currentTime = +this.videoEl.currentTime.toFixed(1);
+        }
       },
       onUpdate() {
-        this.currentTime = +this.videoEl.currentTime.toFixed(1);
+        if (this.videoEl) {
+          this.currentTime = +this.videoEl.currentTime.toFixed(1);
+        }
       },
       onEnd() {
         this.isPaused = true;
@@ -27,29 +32,31 @@
     },
     watch: {
       videoSrc() {
-        this.videoEl.load();
-        this.isPaused = true;
+        if (this.videoEl) {
+          this.videoEl.load();
+          this.isPaused = true;
+        }
       },
     },
     mounted() {
-      this.videoEl = this.$refs.videoEl;
+      this.videoEl = this.$refs.videoEl as CPI<HTMLVideoElement>;
       this.isPaused = this.videoEl.paused;
       this.currentTime = this.videoEl.currentTime;
     },
-  };
+  });
 </script>
 
 <template>
-    <video
-      ref="videoEl"
-      class="video"
-      @loadedmetadata="onLoad"
-      @timeupdate="onUpdate"
-      @ended="onEnd"
-    >
-      <source :src="videoSrc" type="video/mp4" />
-    </video>
-    <p class="subtitles" contenteditable="true">It's interesting, the ghosts</p>
+  <video
+    ref="videoEl"
+    class="video"
+    @loadedmetadata="onLoad"
+    @timeupdate="onUpdate"
+    @ended="onEnd"
+  >
+    <source :src="videoSrc" type="video/mp4" />
+  </video>
+  <p class="subtitles" contenteditable="true">It's interesting, the ghosts</p>
 </template>
 
 <style>

@@ -1,5 +1,7 @@
-<script>
-  export default {
+<script lang="ts">
+  import { defineComponent, ComponentPublicInstance as CPI } from "vue";
+
+  export default defineComponent({
     props: {
       fileType: { type: String, required: true },
       acceptStr: { type: String, required: true },
@@ -7,21 +9,22 @@
     },
     data() {
       return {
-        inputEl: null,
-        labelText: `Select ${this.fileType}`,
-        testImg: null,
+        inputEl: null as CPI<HTMLInputElement> | null,
+        labelText: `Select ${this.fileType}` as string,
       };
     },
     methods: {
       onChange() {
-        this.labelText = this.inputEl.files[0].name;
-        this.updateFile(this.inputEl.files[0]);
+        if (this.inputEl && this.inputEl.files?.length) {
+          this.labelText = this.inputEl.files[0].name;
+          this.updateFile(this.inputEl.files[0]);
+        }
       },
     },
     mounted() {
-      this.inputEl = this.$refs.inputEl;
+      this.inputEl = this.$refs.inputEl as CPI<HTMLInputElement>;
     },
-  };
+  });
 </script>
 
 <template>

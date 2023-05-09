@@ -1,20 +1,21 @@
-<script>
+<script lang="ts">
+  import { defineComponent, ComponentPublicInstance as CPI } from "vue";
   import { mapActions, mapState } from "pinia";
   import { useVideoStore } from "../store";
 
-  export default {
+  export default defineComponent({
     props: {
       start: { type: Number, default: 0 },
       isDisabled: { type: Boolean, default: false },
     },
     data() {
       return {
-        left: null,
-        width: null,
-        isMouseOver: false,
-        isScrubbing: false,
-        indicatorPos: 0,
-        indicatorTime: 0,
+        left: 0 as number,
+        width: 0 as number,
+        isMouseOver: false as boolean,
+        isScrubbing: false as boolean,
+        indicatorPos: 0 as number,
+        indicatorTime: 0 as number,
       };
     },
     computed: {
@@ -40,19 +41,19 @@
     },
     methods: {
       ...mapActions(useVideoStore, ["hiddenPause", "hiddenPlay", "seek"]),
-      calcIndicator(mouseXPos) {
+      calcIndicator(mouseXPos: number) {
         let posRatio = (mouseXPos - this.left) / this.width;
         this.indicatorPos = Math.min(Math.max(posRatio, 0), 1);
         return this.duration * this.indicatorPos;
       },
-      onMouseDown(e) {
+      onMouseDown(e: MouseEvent) {
         if (this.isDisabled) return;
         this.hiddenPause();
         this.isScrubbing = true;
         let time = this.calcIndicator(e.clientX);
         this.seek(time);
       },
-      onMouseMove(e) {
+      onMouseMove(e: MouseEvent) {
         if (this.isDisabled) return;
         let time = this.calcIndicator(e.clientX);
         this.indicatorTime = time;
@@ -65,10 +66,11 @@
         this.hiddenPlay();
         this.isScrubbing = false;
       },
-      onMouseOver(e) {
+      onMouseOver(e: MouseEvent) {
         if (this.isDisabled) return;
         this.isMouseOver = true;
-        let rect = this.$refs.progress.getBoundingClientRect();
+        let progressEl = this.$refs.progress as CPI<HTMLElement>;
+        let rect = progressEl.getBoundingClientRect();
         this.left = rect.left;
         this.width = rect.right - rect.left;
         let time = this.calcIndicator(e.clientX);
@@ -95,7 +97,7 @@
         if (this.isScrubbing) this.onMouseUp();
       });
     },
-  };
+  });
 </script>
 
 <template>

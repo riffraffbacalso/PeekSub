@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+  import { defineComponent } from "vue";
   import { mapState } from "pinia";
   import { useVideoStore } from "./store";
   import ClipList from "./components/ClipList.vue";
@@ -8,7 +9,7 @@
   import Progress from "./components/Progress.vue";
   import Video from "./components/Video.vue";
 
-  export default {
+  export default defineComponent({
     components: {
       ClipList,
       FileInputGroup,
@@ -20,7 +21,7 @@
     computed: {
       ...mapState(useVideoStore, ["videoUploaded"]),
     },
-  };
+  });
 </script>
 
 <template>

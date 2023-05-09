@@ -1,17 +1,18 @@
-<script>
+<script lang="ts">
+  import { defineComponent, ComponentPublicInstance as CPI } from "vue";
   import { mapWritableState } from "pinia";
   import { useSubtitleStore, useVideoStore } from "../store";
   import Clip from "./Clip.vue";
 
-  export default {
+  export default defineComponent({
     components: {
       Clip,
     },
     data() {
       return {
-        clipListEl: null,
-        isScrolled: false,
-        content: [],
+        clipListEl: null as CPI<HTMLOListElement> | null,
+        isScrolled: false as Boolean,
+        content: [] as string[],
       };
     },
     computed: {
@@ -23,22 +24,26 @@
     },
     methods: {
       onScroll() {
-        this.isScrolled = this.clipListEl.scrollTop !== 0;
+        if (this.clipListEl) {
+          this.isScrolled = this.clipListEl.scrollTop !== 0;
+        }
       },
     },
     watch: {
       subtitleFile() {
-        let fr = new FileReader();
-        fr.onload = () => {
-          this.content = fr.result.split("\r\n");
-        };
-        fr.readAsText(this.subtitleFile);
+        if (this.subtitleFile) {
+          let fr = new FileReader();
+          fr.onload = () => {
+            if (fr.result) this.content = (<string>fr.result).split("\r\n");
+          };
+          fr.readAsText(this.subtitleFile);
+        }
       },
     },
     mounted() {
-      this.clipListEl = this.$refs.clipListEl;
+      this.clipListEl = this.$refs.clipListEl as CPI<HTMLOListElement>;
     },
-  };
+  });
 </script>
 
 <template>

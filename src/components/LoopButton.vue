@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
+  import { defineComponent } from "vue";
   import { mapActions, mapState } from "pinia";
   import { useVideoStore } from "../store";
   import LoopSvg from "../assets/loop.svg?component";
 
-  export default {
+  export default defineComponent({
     components: { LoopSvg },
     computed: {
       ...mapState(useVideoStore, ["isLoop"]),
@@ -12,7 +13,7 @@
       },
     },
     methods: { ...mapActions(useVideoStore, ["toggleLoop"]) },
-  };
+  });
 </script>
 
 <template>

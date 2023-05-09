@@ -1,13 +1,13 @@
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 
-export async function extractFrames(file, time) {
+export async function extractFrames(file: File, time: number) {
   console.log(file, time);
   const ffmpeg = createFFmpeg({ log: false });
   await ffmpeg.load();
   ffmpeg.FS("writeFile", "test.mp4", await fetchFile(file));
   await ffmpeg.run(
     "-ss",
-    time,
+    String(time),
     "-i",
     "test.mp4",
     "-frames:v",
