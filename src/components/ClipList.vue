@@ -1,8 +1,12 @@
 <script>
   import { mapWritableState } from "pinia";
   import { useSubtitleStore, useVideoStore } from "../store";
+  import Clip from "./Clip.vue";
 
   export default {
+    components: {
+      Clip,
+    },
     data() {
       return {
         clipListEl: null,
@@ -26,7 +30,7 @@
       subtitleFile() {
         let fr = new FileReader();
         fr.onload = () => {
-          this.content = fr.result.split("\n");
+          this.content = fr.result.split("\r\n");
         };
         fr.readAsText(this.subtitleFile);
       },
@@ -44,9 +48,9 @@
     :style="shadowStyle"
     @scroll="onScroll"
   >
-    <li v-for="line in content">
+    <Clip v-for="line in content" :subtitle="line">
       {{ line }}
-    </li>
+    </Clip>
   </ol>
 </template>
 
