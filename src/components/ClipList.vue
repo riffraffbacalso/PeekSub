@@ -2,6 +2,7 @@
   import { defineComponent, ComponentPublicInstance as CPI } from "vue";
   import { mapWritableState } from "pinia";
   import { useSubtitleStore, useVideoStore } from "../store";
+  import { parseSrt, SRTBlock } from "../util/subtitleParse";
   import Clip from "./Clip.vue";
 
   export default defineComponent({
@@ -12,7 +13,7 @@
       return {
         clipListEl: null as CPI<HTMLOListElement> | null,
         isScrolled: false as Boolean,
-        content: [] as string[],
+        srtBlocks: [] as SRTBlock[],
       };
     },
     computed: {
@@ -34,7 +35,10 @@
         if (this.subtitleFile) {
           let fr = new FileReader();
           fr.onload = () => {
-            if (fr.result) this.content = (<string>fr.result).split("\r\n");
+            if (fr.result) {
+              let srtContent = (<string>fr.result).split("\r\n");
+              this.srtBlocks = parseSrt(srtContent);
+            }
           };
           fr.readAsText(this.subtitleFile);
         }
@@ -53,8 +57,8 @@
     :style="shadowStyle"
     @scroll="onScroll"
   >
-    <Clip v-for="line in content" :subtitle="line">
-      {{ line }}
+    <Clip v-for="srtBlock in srtBlocks" :subtitle="srtBlock.subtitles[0]">
+      {{ srtBlock.subtitles[0] }}
     </Clip>
   </ol>
 </template>
