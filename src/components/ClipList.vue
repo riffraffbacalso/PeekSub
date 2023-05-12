@@ -3,6 +3,8 @@
   import { mapWritableState } from "pinia";
   import { useSubtitleStore, useVideoStore } from "../store";
   import { parseSrt, SRTBlock } from "../util/subtitleParse";
+  import { extractFrames } from "../util/videoFrames";
+  import { toSeconds } from "../util/time";
   import Clip from "./Clip.vue";
 
   export default defineComponent({
@@ -18,7 +20,11 @@
     },
     computed: {
       ...mapWritableState(useSubtitleStore, ["subtitleFile"]),
-      ...mapWritableState(useVideoStore, ["videoFile", "duration"]),
+      ...mapWritableState(useVideoStore, [
+        "videoFile",
+        "duration",
+        "thumbnails",
+      ]),
       shadowStyle() {
         return this.isScrolled ? "box-shadow: 0px 7px 5px -7px inset" : "";
       },
@@ -31,13 +37,25 @@
       },
     },
     watch: {
-      subtitleFile() {
+      async subtitleFile() {
         if (this.subtitleFile) {
           let fr = new FileReader();
-          fr.onload = () => {
+          fr.onload = async () => {
             if (fr.result) {
-              let srtContent = (<string>fr.result).split("\r\n");
+              let srtContent = (<string>fr.result)
+                .replace(/\r/g, "")
+                .split("\n");
               this.srtBlocks = parseSrt(srtContent);
+            }
+            if (this.videoFile) {
+              this.thumbnails = await extractFrames(
+                this.videoFile,
+                this.srtBlocks
+                  .filter(
+                    (srtBlock) => toSeconds(srtBlock.endTime) <= this.duration
+                  )
+                  .map((srtBlock) => srtBlock.startTime)
+              );
             }
           };
           fr.readAsText(this.subtitleFile);
@@ -57,7 +75,7 @@
     :style="shadowStyle"
     @scroll="onScroll"
   >
-    <Clip v-for="srtBlock in srtBlocks" :subtitle="srtBlock.subtitles[0]">
+    <Clip v-for="srtBlock in srtBlocks" :srtBlock="srtBlock">
       {{ srtBlock.subtitles[0] }}
     </Clip>
   </ol>
@@ -67,8 +85,7 @@
   .clip-list {
     all: unset;
     width: 100%;
-    height: calc(100% - 40px);
-    padding: 20px;
+    height: 100%;
     margin: 0;
     overflow-x: hidden;
     overflow-y: scroll;

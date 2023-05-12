@@ -9,6 +9,7 @@ export const useVideoStore = defineStore("video", {
     isPaused: true as boolean,
     currentTime: 0 as number,
     duration: 0 as number,
+    thumbnails: [] as string[],
   }),
   getters: {
     videoSrc(state) {

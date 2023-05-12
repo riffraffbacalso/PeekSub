@@ -1,10 +1,7 @@
-interface Time {
-  hour: number;
-  minute: number;
-  second: number;
-  milli: number;
-}
+import { Time } from "./time";
+
 export interface SRTBlock {
+  id: number;
   startTime: Time;
   endTime: Time;
   subtitles: string[];
@@ -13,6 +10,7 @@ export interface SRTBlock {
 const numReg = /\d+/g;
 
 export function parseBlock(srtLines: string[]) {
+  let id = +srtLines[0];
   let matches = [...srtLines[1].matchAll(numReg)];
   let startTime: Time = {
     hour: +matches[0][0],
@@ -27,7 +25,7 @@ export function parseBlock(srtLines: string[]) {
     milli: +matches[7][0],
   };
   let subtitles = srtLines.slice(2);
-  let srtBlock: SRTBlock = { startTime, endTime, subtitles };
+  let srtBlock: SRTBlock = { id, startTime, endTime, subtitles };
   return srtBlock;
 }
 
