@@ -2,7 +2,7 @@
   import { defineComponent, ComponentPublicInstance as CPI } from "vue";
   import { mapWritableState } from "pinia";
   import { useSubtitleStore, useVideoStore } from "../store";
-  import { parseSrt, SRTBlock } from "../util/subtitleParse";
+  import { parseSrt } from "../util/subtitleParse";
   // import { extractFrames } from "../util/videoFrames";
   // import { toSeconds } from "../util/time";
   import Clip from "./Clip.vue";
@@ -15,16 +15,15 @@
       return {
         clipListEl: null as CPI<HTMLOListElement> | null,
         isScrolled: false as Boolean,
-        srtBlocks: [] as SRTBlock[],
       };
     },
     computed: {
-      ...mapWritableState(useSubtitleStore, ["subtitleFile"]),
       ...mapWritableState(useVideoStore, [
         "videoFile",
         "duration",
         "thumbnails",
       ]),
+      ...mapWritableState(useSubtitleStore, ["subtitleFile", "srtBlocks"]),
       shadowStyle() {
         return this.isScrolled ? "box-shadow: 0px 7px 5px -7px inset" : "";
       },

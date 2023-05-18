@@ -1,5 +1,6 @@
 import { ComponentPublicInstance as CPI } from "vue";
 import { defineStore } from "pinia";
+import { SRTBlock } from "./util/subtitleParse";
 
 export const useVideoStore = defineStore("video", {
   state: () => ({
@@ -57,5 +58,7 @@ export const useVideoStore = defineStore("video", {
 export const useSubtitleStore = defineStore("subtitle", {
   state: () => ({
     subtitleFile: null as File | null,
+    srtBlocks: [] as SRTBlock[],
+    selectedBlock: null as number | null,
   }),
 });

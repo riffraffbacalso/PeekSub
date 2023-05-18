@@ -1,7 +1,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from "vue";
-  import { mapState } from "pinia";
-  import { useVideoStore } from "../store";
+  import { mapState, mapWritableState } from "pinia";
+  import { useVideoStore, useSubtitleStore } from "../store";
   import { SRTBlock } from "../util/subtitleParse";
 
   export default defineComponent({
@@ -10,8 +10,20 @@
     },
     computed: {
       ...mapState(useVideoStore, ["thumbnails"]),
+      ...mapWritableState(useSubtitleStore, ["selectedBlock"]),
+      selectedStyle() {
+        return this.srtBlock.id === this.selectedBlock
+          ? "background: #3C5357"
+          : "";
+      },
       imgSrc() {
-        return this.thumbnails[this.srtBlock.id - 1] || "";
+        return this.thumbnails[this.srtBlock.id] || "";
+      },
+    },
+    methods: {
+      onCheck() {
+        console.log(`checked ${this.srtBlock.id}!`);
+        this.selectedBlock = this.srtBlock.id;
       },
     },
   });
@@ -19,23 +31,36 @@
 
 <template>
   <li>
-    <div class="clip">
+    <input class="clip-check" type="checkbox" :id="String(srtBlock.id)" />
+    <label
+      class="clip"
+      :for="String(srtBlock.id)"
+      @click="onCheck"
+      :style="selectedStyle"
+    >
       <img :src="imgSrc" width="128" height="72" v-if="imgSrc" />
       <div class="clip-subtitle-container">
         <span class="clip-subtitle" v-for="subtitle in srtBlock.subtitles">
           {{ subtitle }}
         </span>
       </div>
-    </div>
+    </label>
   </li>
 </template>
 
 <style>
   .clip {
+    all: unset;
     display: flex;
+    width: 100%;
     min-height: 10px;
     padding: 5px;
+    cursor: pointer;
     outline: 1px solid gray;
+  }
+
+  .clip-check {
+    display: none;
   }
 
   .clip-subtitle-container {
@@ -43,7 +68,7 @@
   }
 
   .clip-subtitle {
-    display: inline-block;
+    display: block;
     color: lightgray;
     white-space: pre-wrap;
   }

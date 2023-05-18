@@ -10,7 +10,7 @@ export interface SRTBlock {
 const numReg = /\d+/g;
 
 export function parseBlock(srtLines: string[]) {
-  let id = +srtLines[0];
+  let id = +srtLines[0] - 1;
   let matches = [...srtLines[1].matchAll(numReg)];
   let startTime: Time = {
     hour: +matches[0][0],
