@@ -80,7 +80,7 @@
     position: absolute;
     bottom: 0;
     left: 50%;
-    width: 100%;
+    width: max-content;
     margin-bottom: 1rem;
     color: white;
     font-size: calc(1.275rem + 0.3vw);
