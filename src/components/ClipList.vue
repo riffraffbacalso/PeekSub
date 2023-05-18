@@ -3,8 +3,8 @@
   import { mapWritableState } from "pinia";
   import { useSubtitleStore, useVideoStore } from "../store";
   import { parseSrt, SRTBlock } from "../util/subtitleParse";
-  import { extractFrames } from "../util/videoFrames";
-  import { toSeconds } from "../util/time";
+  // import { extractFrames } from "../util/videoFrames";
+  // import { toSeconds } from "../util/time";
   import Clip from "./Clip.vue";
 
   export default defineComponent({
@@ -47,16 +47,16 @@
                 .split("\n");
               this.srtBlocks = parseSrt(srtContent);
             }
-            if (this.videoFile) {
-              this.thumbnails = await extractFrames(
-                this.videoFile,
-                this.srtBlocks
-                  .filter(
-                    (srtBlock) => toSeconds(srtBlock.endTime) <= this.duration
-                  )
-                  .map((srtBlock) => srtBlock.startTime)
-              );
-            }
+            // if (this.videoFile) {
+            //   this.thumbnails = await extractFrames(
+            //     this.videoFile,
+            //     this.srtBlocks
+            //       .filter(
+            //         (srtBlock) => toSeconds(srtBlock.endTime) <= this.duration
+            //       )
+            //       .map((srtBlock) => srtBlock.startTime)
+            //   );
+            // }
           };
           fr.readAsText(this.subtitleFile);
         }
