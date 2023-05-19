@@ -36,11 +36,7 @@
     @blur="onBlur"
     @input="onInput"
   >
-    <template
-      v-for="subtitle in selectedBlock
-        ? srtBlocks[selectedBlock].subtitles
-        : []"
-    >
+    <template v-for="subtitle in srtBlocks[selectedBlock!]?.subtitles ?? []">
       <span class="subtitle-line" v-if="isFocused">{{ subtitle }}</span>
       <span class="subtitle-line" v-else v-html="subtitle" />
     </template>
