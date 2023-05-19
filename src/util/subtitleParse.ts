@@ -24,7 +24,7 @@ export function parseBlock(srtLines: string[]) {
     second: +matches[6][0],
     milli: +matches[7][0],
   };
-  let subtitles = srtLines.slice(2);
+  let subtitles = srtLines.slice(2, -1);
   let srtBlock: SRTBlock = { id, startTime, endTime, subtitles };
   return srtBlock;
 }
