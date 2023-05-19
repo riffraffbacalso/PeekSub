@@ -19,15 +19,11 @@
     },
     methods: {
       onLoad() {
-        if (this.videoEl) {
-          this.duration = +this.videoEl.duration.toFixed(1);
-          this.currentTime = +this.videoEl.currentTime.toFixed(1);
-        }
+        this.duration = +this.videoEl!.duration.toFixed(1);
+        this.currentTime = +this.videoEl!.currentTime.toFixed(1);
       },
       onUpdate() {
-        if (this.videoEl) {
-          this.currentTime = +this.videoEl.currentTime.toFixed(1);
-        }
+        this.currentTime = +this.videoEl!.currentTime.toFixed(1);
       },
       onEnd() {
         this.isPaused = true;
@@ -36,10 +32,8 @@
     },
     watch: {
       videoSrc() {
-        if (this.videoEl) {
-          this.videoEl.load();
-          this.isPaused = true;
-        }
+        this.videoEl!.load();
+        this.isPaused = true;
       },
     },
     mounted() {

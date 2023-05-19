@@ -15,9 +15,9 @@
     },
     methods: {
       onChange() {
-        if (this.inputEl && this.inputEl.files?.length) {
-          this.labelText = this.inputEl.files[0].name;
-          this.updateFile(this.inputEl.files[0]);
+        if (this.inputEl!.files?.length) {
+          this.labelText = this.inputEl!.files[0].name;
+          this.updateFile(this.inputEl!.files[0]);
         }
       },
     },

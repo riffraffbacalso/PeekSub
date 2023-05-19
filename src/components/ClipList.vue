@@ -30,35 +30,27 @@
     },
     methods: {
       onScroll() {
-        if (this.clipListEl) {
-          this.isScrolled = this.clipListEl.scrollTop !== 0;
-        }
+        this.isScrolled = this.clipListEl!.scrollTop !== 0;
       },
     },
     watch: {
       async subtitleFile() {
-        if (this.subtitleFile) {
-          let fr = new FileReader();
-          fr.onload = async () => {
-            if (fr.result) {
-              let srtContent = (<string>fr.result)
-                .replace(/\r/g, "")
-                .split("\n");
-              this.srtBlocks = parseSrt(srtContent);
-            }
-            // if (this.videoFile) {
-            //   this.thumbnails = await extractFrames(
-            //     this.videoFile,
-            //     this.srtBlocks
-            //       .filter(
-            //         (srtBlock) => toSeconds(srtBlock.endTime) <= this.duration
-            //       )
-            //       .map((srtBlock) => srtBlock.startTime)
-            //   );
-            // }
-          };
-          fr.readAsText(this.subtitleFile);
-        }
+        let fr = new FileReader();
+        fr.onload = async () => {
+          if (fr.result) {
+            let srtContent = (<string>fr.result).replace(/\r/g, "").split("\n");
+            this.srtBlocks = parseSrt(srtContent);
+          }
+          // this.thumbnails = await extractFrames(
+          //   this.videoFile!,
+          //   this.srtBlocks
+          //     .filter(
+          //       (srtBlock) => toSeconds(srtBlock.endTime) <= this.duration
+          //     )
+          //     .map((srtBlock) => srtBlock.startTime)
+          // );
+        };
+        fr.readAsText(this.subtitleFile!);
       },
     },
     mounted() {
