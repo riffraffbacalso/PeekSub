@@ -1,12 +1,15 @@
 <script lang="ts">
   import { defineComponent, ComponentPublicInstance as CPI } from "vue";
   import { mapState, mapWritableState } from "pinia";
-  import { useVideoStore, useSubtitleStore } from "../store";
+  import { useVideoStore } from "../store";
+  import Subtitle from "./Subtitle.vue";
 
   export default defineComponent({
+    components: {
+      Subtitle,
+    },
     computed: {
       ...mapState(useVideoStore, ["videoSrc"]),
-      ...mapState(useSubtitleStore, ["srtBlocks", "selectedBlock"]),
       ...mapWritableState(useVideoStore, [
         "videoEl",
         "isPaused",
@@ -57,16 +60,7 @@
   >
     <source :src="videoSrc" type="video/mp4" />
   </video>
-  <p class="subtitles" contenteditable="true">
-    <span
-      class="subtitle-line"
-      v-for="subtitle in selectedBlock
-        ? srtBlocks[selectedBlock].subtitles
-        : []"
-    >
-      {{ subtitle }}
-    </span>
-  </p>
+  <Subtitle />
 </template>
 
 <style>
@@ -74,28 +68,5 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-  }
-
-  .subtitles {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: max-content;
-    margin-bottom: 1rem;
-    color: white;
-    font-size: calc(1.275rem + 0.3vw);
-    text-align: center;
-    text-shadow: 1px 1px 1px black;
-    transform: translateX(-50%);
-  }
-
-  .subtitles[contenteditable]:focus {
-    background-color: rgba(80, 80, 80, 0.25);
-    outline: none;
-  }
-
-  .subtitle-line {
-    display: block;
-    white-space: pre-wrap;
   }
 </style>

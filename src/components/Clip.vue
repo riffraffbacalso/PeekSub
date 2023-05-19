@@ -22,7 +22,6 @@
     },
     methods: {
       onCheck() {
-        console.log(`checked ${this.srtBlock.id}!`);
         this.selectedBlock = this.srtBlock.id;
       },
     },
