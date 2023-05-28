@@ -87,7 +87,10 @@
 
   .subtitle-line {
     display: block;
+    min-width: 20ch;
     min-height: 1lh;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
     white-space: pre-wrap;
   }
 </style>
