@@ -1,11 +1,12 @@
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { defineComponent, ComponentPublicInstance as CPI } from "vue";
   import { mapState } from "pinia";
   import { useSubtitleStore } from "../store";
 
   export default defineComponent({
     data() {
       return {
+        pEl: null as CPI<HTMLParagraphElement> | null,
         isFocused: false as boolean,
       };
     },
@@ -19,27 +20,49 @@
       onBlur() {
         this.isFocused = false;
       },
-      onInput(e: Event) {
-        this.srtBlocks[this.selectedBlock!].subtitles = (<HTMLInputElement>(
-          e.target
-        )).innerText.split("\n");
+      onKeyDown(e: KeyboardEvent) {
+        // if (e.shiftKey && e.key === "Enter") {
+        // e.preventDefault();
+        // const selection = window.getSelection();
+        // const range = selection!.getRangeAt(0);
+        // const newline = document.createTextNode("\n");
+        // range.insertNode(newline);
+        // range.setStartAfter(newline);
+        // range.setEndAfter(newline);
+        // selection!.removeAllRanges();
+        // selection!.addRange(range);
+        // }
+        if (!e.shiftKey && e.key === "Enter") {
+          e.preventDefault();
+          this.srtBlocks[this.selectedBlock!].subtitles =
+            this.pEl!.innerText.split("\n");
+          this.pEl!.blur();
+        }
       },
+      },
+    mounted() {
+      this.pEl = this.$refs.pEl as CPI<HTMLParagraphElement>;
     },
   });
 </script>
 
 <template>
   <p
+    ref="pEl"
     class="subtitles"
     contenteditable="true"
     @focus="onFocus"
     @blur="onBlur"
-    @input="onInput"
+    @keydown="onKeyDown"
   >
-    <template v-for="subtitle in srtBlocks[selectedBlock!]?.subtitles ?? []">
-      <span class="subtitle-line" v-if="isFocused">{{ subtitle }}</span>
-      <span class="subtitle-line" v-else v-html="subtitle" />
-    </template>
+    <span class="subtitle-line" v-if="isFocused">
+      {{ srtBlocks[selectedBlock!]?.subtitles.join("\n") }}
+    </span>
+    <span
+      class="subtitle-line"
+      v-else
+      v-html="srtBlocks[selectedBlock!]?.subtitles.join('\n')"
+    />
   </p>
 </template>
 
@@ -64,6 +87,7 @@
 
   .subtitle-line {
     display: block;
+    min-height: 1lh;
     white-space: pre-wrap;
   }
 </style>

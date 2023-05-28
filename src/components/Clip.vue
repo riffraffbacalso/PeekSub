@@ -68,6 +68,7 @@
 
   .clip-subtitle {
     display: block;
+    min-height: 1lh;
     color: lightgray;
     white-space: pre-wrap;
   }
