@@ -52,17 +52,17 @@
 <template>
   <p
     ref="pEl"
-    class="subtitles"
+    class="subtitle-editor"
     contenteditable="true"
     @focus="onFocus"
     @blur="onBlur"
     @keydown="onKeyDown"
   >
-    <span class="subtitle-line" v-if="isFocused">
+    <span class="subtitle" v-if="isFocused">
       {{ srtBlocks[selectedBlock!]?.subtitles.join("\n") }}
     </span>
     <span
-      class="subtitle-line"
+      class="subtitle"
       v-else
       v-html="srtBlocks[selectedBlock!]?.subtitles.join('\n')"
     />
@@ -70,7 +70,7 @@
 </template>
 
 <style>
-  .subtitles {
+  .subtitle-editor {
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -83,12 +83,12 @@
     transform: translateX(-50%);
   }
 
-  .subtitles[contenteditable]:focus {
+  .subtitle-editor[contenteditable]:focus {
     background-color: rgba(80, 80, 80, 0.25);
     outline: none;
   }
 
-  .subtitle-line {
+  .subtitle {
     display: block;
     min-width: 20ch;
     min-height: 1lh;
