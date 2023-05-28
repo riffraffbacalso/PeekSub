@@ -21,6 +21,9 @@
         this.isFocused = false;
       },
       onKeyDown(e: KeyboardEvent) {
+        if (e.key === "Escape") {
+          this.pEl!.blur();
+        }
         // if (e.shiftKey && e.key === "Enter") {
         // e.preventDefault();
         // const selection = window.getSelection();
@@ -39,7 +42,7 @@
           this.pEl!.blur();
         }
       },
-      },
+    },
     mounted() {
       this.pEl = this.$refs.pEl as CPI<HTMLParagraphElement>;
     },
