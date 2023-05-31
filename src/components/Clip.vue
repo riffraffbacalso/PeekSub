@@ -39,8 +39,11 @@
     >
       <img :src="imgSrc" width="128" height="72" v-if="imgSrc" />
       <div class="clip-subtitle-container">
-        <span class="clip-subtitle" v-for="subtitle in srtBlock.subtitles">
+        <!-- <span class="clip-subtitle" v-for="subtitle in srtBlock.subtitles">
           {{ subtitle }}
+        </span> -->
+        <span class="clip-subtitle">
+          {{ srtBlock.subtitle }}
         </span>
       </div>
     </label>

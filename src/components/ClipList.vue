@@ -66,9 +66,7 @@
     :style="shadowStyle"
     @scroll="onScroll"
   >
-    <Clip v-for="srtBlock in srtBlocks" :srtBlock="srtBlock">
-      {{ srtBlock.subtitles[0] }}
-    </Clip>
+    <Clip v-for="srtBlock in srtBlocks" :srtBlock="srtBlock" />
   </ol>
 </template>
 

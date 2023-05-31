@@ -37,8 +37,7 @@
         // }
         if (!e.shiftKey && e.key === "Enter") {
           e.preventDefault();
-          this.srtBlocks[this.selectedBlock!].subtitles =
-            this.pEl!.innerText.split("\n");
+          this.srtBlocks[this.selectedBlock!].subtitle = this.pEl!.innerText;
           this.pEl!.blur();
         }
       },
@@ -59,12 +58,12 @@
     @keydown="onKeyDown"
   >
     <span class="subtitle" v-if="isFocused">
-      {{ srtBlocks[selectedBlock!]?.subtitles.join("\n") }}
+      {{ srtBlocks[selectedBlock!]?.subtitle }}
     </span>
     <span
       class="subtitle"
       v-else
-      v-html="srtBlocks[selectedBlock!]?.subtitles.join('\n')"
+      v-html="srtBlocks[selectedBlock!]?.subtitle"
     />
   </p>
 </template>

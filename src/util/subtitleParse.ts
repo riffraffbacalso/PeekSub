@@ -4,7 +4,7 @@ export interface SRTBlock {
   id: number;
   startTime: Time;
   endTime: Time;
-  subtitles: string[];
+  subtitle: string;
 }
 
 const numReg = /\d+/g;
@@ -24,8 +24,8 @@ export function parseBlock(srtLines: string[]) {
     second: +matches[6][0],
     milli: +matches[7][0],
   };
-  let subtitles = srtLines.slice(2, -1);
-  let srtBlock: SRTBlock = { id, startTime, endTime, subtitles };
+  let subtitle = srtLines.slice(2, -1).join("\n");
+  let srtBlock: SRTBlock = { id, startTime, endTime, subtitle };
   return srtBlock;
 }
 
