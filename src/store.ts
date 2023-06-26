@@ -1,6 +1,6 @@
 import { ComponentPublicInstance as CPI } from "vue";
 import { defineStore } from "pinia";
-import { SRTBlock } from "./util/subtitleParse";
+import { SRTBlock, renderSrtFormat } from "./util/subtitleParse";
 
 export const useVideoStore = defineStore("video", {
   state: () => ({
@@ -49,4 +49,12 @@ export const useSubtitleStore = defineStore("subtitle", {
     srtBlocks: [] as SRTBlock[],
     selectedBlock: null as number | null,
   }),
+  getters: {
+    rawSubtitle(state) {
+      return state.srtBlocks[state.selectedBlock!]?.subtitle || "";
+    },
+    renderedSubtitle(): string {
+      return renderSrtFormat(this.rawSubtitle);
+    },
+  },
 });

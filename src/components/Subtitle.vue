@@ -2,7 +2,6 @@
   import { defineComponent, ComponentPublicInstance as CPI } from "vue";
   import { mapState } from "pinia";
   import { useSubtitleStore } from "../store";
-  import { renderSrtFormat } from "../util/subtitleParse";
 
   export default defineComponent({
     data() {
@@ -12,15 +11,12 @@
       };
     },
     computed: {
-      ...mapState(useSubtitleStore, ["srtBlocks", "selectedBlock"]),
-      rawSubtitle() {
-        return this.srtBlocks[this.selectedBlock!]?.subtitle;
-      },
-      renderedSubtitle() {
-        return renderSrtFormat(
-          this.srtBlocks[this.selectedBlock!]?.subtitle || ""
-        );
-      },
+      ...mapState(useSubtitleStore, [
+        "srtBlocks",
+        "selectedBlock",
+        "rawSubtitle",
+        "renderedSubtitle",
+      ]),
     },
     methods: {
       onFocus() {
