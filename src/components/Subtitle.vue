@@ -2,6 +2,7 @@
   import { defineComponent, ComponentPublicInstance as CPI } from "vue";
   import { mapState } from "pinia";
   import { useSubtitleStore } from "../store";
+  import { renderSrtFormat } from "../util/subtitleParse";
 
   export default defineComponent({
     data() {
@@ -12,6 +13,14 @@
     },
     computed: {
       ...mapState(useSubtitleStore, ["srtBlocks", "selectedBlock"]),
+      rawSubtitle() {
+        return this.srtBlocks[this.selectedBlock!]?.subtitle;
+      },
+      renderedSubtitle() {
+        return renderSrtFormat(
+          this.srtBlocks[this.selectedBlock!]?.subtitle || ""
+        );
+      },
     },
     methods: {
       onFocus() {
@@ -58,13 +67,9 @@
     @keydown="onKeyDown"
   >
     <span class="subtitle" v-if="isFocused">
-      {{ srtBlocks[selectedBlock!]?.subtitle }}
+      {{ rawSubtitle }}
     </span>
-    <span
-      class="subtitle"
-      v-else
-      v-html="srtBlocks[selectedBlock!]?.subtitle"
-    />
+    <span class="subtitle" v-else v-html="renderedSubtitle" />
   </p>
 </template>
 

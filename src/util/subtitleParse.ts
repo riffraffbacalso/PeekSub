@@ -8,6 +8,7 @@ export interface SRTBlock {
 }
 
 const numReg = /\d+/g;
+const htmlReg = /(<)(?!\/?[bui]|\/font|font color="\w{3,9}")\/?[^>]*(>)/g;
 
 export function parseBlock(srtLines: string[]) {
   let id = +srtLines[0] - 1;
@@ -41,4 +42,11 @@ export function parseSrt(srt: string[]) {
     }
   }
   return parsed;
+}
+
+export function renderSrtFormat(raw: string) {
+  return raw.replace(
+    htmlReg,
+    (match, ..._) => "&lt" + match.slice(1, -1) + "&gt"
+  );
 }
